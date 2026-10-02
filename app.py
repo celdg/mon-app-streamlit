@@ -15,7 +15,7 @@
         "🍳 Mes Recettes & Macros IA"
       </h1>
       <button onclick="toggleKeyModal()" class="text-sm bg-indigo-700 hover:bg-indigo-800 px-3 py-1.5 rounded-lg transition">
-        🔑 Clé API Gemini
+        "🔑 Clé API Gemini"
       </button>
     </div>
   </header>
@@ -45,7 +45,7 @@
       <div class="mt-3 flex justify-between items-center">
         <span id="statusMessage" class="text-xs text-slate-500"></span>
         <button onclick="extractRecipe()" id="btnExtract" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-5 py-2 rounded-lg transition">
-          ✨ Extraire avec Macros & Calories
+          "✨ Extraire avec Macros & Calories"
         </button>
       </div>
     </section>
