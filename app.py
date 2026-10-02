@@ -24,7 +24,7 @@ st.sidebar.header("🔑 Clé API Gemini")
 api_key_input = st.sidebar.text_input(
     "Entre ta clé API Google AI Studio :",
     type="password",
-    value=st.session_state.get("gemini_api_key", ""),
+    value="AQ.Ab8RN6LPIUOP3-U1l1Z-namuWQITuH1x-IKyumKQj8B49RBKHQ",
     help="Récupère ta clé gratuite sur https://aistudio.google.com/"
 )
 if api_key_input:
