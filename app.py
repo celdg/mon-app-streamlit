@@ -22,17 +22,17 @@
 
   <main class="max-w-4xl mx-auto p-4 space-y-6">
 
-    <!-- Formulaire d'extraction -->
+    # Formulaire d'extraction 
     <section class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
       <h2 class="text-lg font-semibold mb-2 text-slate-800">Ajouter une recette</h2>
       <p class="text-sm text-slate-500 mb-4">
         Colle le texte d'une publication OU importe directement une vidéo. L'IA extraira la recette, les calories et les macros.
       </p>
 
-      <!-- Zone texte -->
+      # Zone texte 
       <textarea id="recipeInput" rows="3" class="w-full p-3 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none mb-3" placeholder="Colle le texte ou la description ici..."></textarea>
 
-      <!-- Zone import vidéo -->
+      # Zone import vidéo 
       <div class="border-2 border-dashed border-indigo-200 bg-indigo-50/50 p-4 rounded-lg mb-4 text-center">
         <label for="videoInput" class="cursor-pointer block">
           <span class="text-indigo-600 font-medium text-sm">🎥 Choisir ou déposer une vidéo</span>
@@ -50,7 +50,7 @@
       </div>
     </section>
 
-    <!-- Liste des recettes -->
+    # Liste des recettes
     <section>
       <div class="flex justify-between items-center mb-4">
         <h2 class="text-lg font-semibold">Mes Recettes (<span id="recipeCount">0</span>)</h2>
@@ -64,7 +64,7 @@
 
   </main>
 
-  <!-- Modal Clé API -->
+  # Modal Clé API
   <div id="keyModal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center p-4 z-50">
     <div class="bg-white p-6 rounded-xl max-w-md w-full space-y-4">
       <h3 class="text-lg font-bold">Clé API Google Gemini</h3>
@@ -79,7 +79,7 @@
     </div>
   </div>
 
-  <!-- Modal d'édition manuelle complète -->
+  # Modal d'édition manuelle complète
   <div id="editModal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center p-4 z-50">
     <div class="bg-white p-6 rounded-xl max-w-lg w-full space-y-4 max-h-[90vh] overflow-y-auto">
       <h3 class="text-lg font-bold text-slate-800">Modifier la recette</h3>
@@ -102,7 +102,7 @@
         </div>
       </div>
 
-      <!-- Macros / Nutrition -->
+      # Macros / Nutrition
       <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg space-y-2">
         <p class="text-xs font-bold text-slate-700">Nutrition (par portion) :</p>
         <div class="grid grid-cols-4 gap-2">
@@ -426,7 +426,7 @@
               </div>
             </div>
 
-            <!-- Infos Temps & Portions Réglables -->
+            # Infos Temps & Portions Réglables
             <div class="flex items-center justify-between bg-slate-50 p-2.5 rounded-lg my-3 border border-slate-100">
               <span class="text-xs text-slate-500">⏱️ ${r.prepTime}</span>
               
@@ -438,7 +438,7 @@
               </div>
             </div>
 
-            <!-- Bloc Calories & Macros -->
+            # Bloc Calories & Macros
             <div class="grid grid-cols-4 gap-1 text-center bg-indigo-50/60 p-2 rounded-lg mb-3 text-xs border border-indigo-100">
               <div>
                 <span class="block text-[10px] text-indigo-400 font-semibold">CALORIES</span>
@@ -458,19 +458,19 @@
               </div>
             </div>
 
-            <!-- Ingrédients -->
+            # Ingrédients
             <div class="mt-3">
               <p class="text-xs font-semibold text-slate-700">Ingrédients :</p>
               <ul class="mt-1 space-y-0.5">${ingList}</ul>
             </div>
 
-            <!-- Étapes -->
+            # Étapes
             <div class="mt-3">
               <p class="text-xs font-semibold text-slate-700">Préparation :</p>
               <ul class="mt-1 space-y-1">${stepList}</ul>
             </div>
 
-            <!-- Remarques / Remarques personnelles -->
+            # Remarques / Remarques personnelles
             ${r.comment ? `
               <div class="mt-3 p-2.5 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-900">
                 <span class="font-bold">💬 Note :</span> ${r.comment}
