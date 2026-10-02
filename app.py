@@ -12,7 +12,7 @@
   <header class="bg-indigo-600 text-white p-4 shadow-md sticky top-0 z-40">
     <div class="max-w-4xl mx-auto flex justify-between items-center">
       <h1 class="text-xl font-bold flex items-center gap-2">
-        🍳 Mes Recettes & Macros IA
+        "🍳 Mes Recettes & Macros IA"
       </h1>
       <button onclick="toggleKeyModal()" class="text-sm bg-indigo-700 hover:bg-indigo-800 px-3 py-1.5 rounded-lg transition">
         🔑 Clé API Gemini
