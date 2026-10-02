@@ -1,8 +1,7 @@
 import json
 import re
+import requests
 import streamlit as st
-from google import genai
-from google.genai import types
 
 # ------------------------------------------------------------------------------
 # CONFIGURATION DE LA PAGE
@@ -55,43 +54,48 @@ uploaded_video = st.file_uploader(
     type=["mp4", "mov", "avi", "m4v"]
 )
 
-# Fonction de calcul et d'extraction via l'API Gemini
+# Fonction d'extraction via la REST API Gemini (requests)
 def extract_recipe_with_gemini(text, video_file, key):
-    client = genai.Client(api_key=key)
-    
     prompt = """Analyse le contenu (texte et/ou vidéo) et extrait les informations sous forme de JSON strict respectant exactement ce schéma :
-    {
-      "title": "Nom du plat",
-      "prepTime": "ex: 20 min",
-      "baseServings": 4,
-      "ingredients": ["200g de chocolat", "3 oeufs"],
-      "steps": ["Étape 1...", "Étape 2..."],
-      "calories": 350,
-      "proteins": 12,
-      "carbs": 45,
-      "fats": 15
-    }
-    baseServings, calories, proteins, carbs et fats doivent être des NOMBRES ENTIERS (calories et macros par portion).
-    Rends UNIQUEMENT le JSON sans formatage de bloc de code."""
+{
+  "title": "Nom du plat",
+  "prepTime": "ex: 20 min",
+  "baseServings": 4,
+  "ingredients": ["200g de chocolat", "3 oeufs"],
+  "steps": ["Étape 1...", "Étape 2..."],
+  "calories": 350,
+  "proteins": 12,
+  "carbs": 45,
+  "fats": 15
+}
+baseServings, calories, proteins, carbs et fats doivent être des NOMBRES ENTIERS (calories et macros par portion).
+Rends UNIQUEMENT le JSON sans formatage de bloc de code."""
 
-    contents = [prompt]
+    parts = [{"text": prompt}]
     if text:
-        contents.append(f"Texte fourni : {text}")
+        parts.append({"text": f"Texte fourni : {text}"})
     if video_file is not None:
+        import base64
         video_bytes = video_file.read()
-        contents.append(
-            types.Part.from_bytes(
-                data=video_bytes,
-                mime_type=video_file.type or "video/mp4"
-            )
-        )
+        b64_data = base64.b64encode(video_bytes).decode('utf-8')
+        mime_type = video_file.type or "video/mp4"
+        parts.append({
+            "inline_data": {
+                "mime_type": mime_type,
+                "data": b64_data
+            }
+        })
 
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=contents
-    )
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={key}"
+    headers = {"Content-Type": "application/json"}
+    payload = {"contents": [{"parts": parts}]}
+
+    response = requests.post(url, headers=headers, json=payload)
+    response.raise_for_status()
     
-    clean_json = response.text.replace("```json", "").replace("```", "").strip()
+    data = response.json()
+    raw_text = data["candidates"][0]["content"]["parts"][0]["text"]
+    clean_json = raw_text.replace("```json", "").replace("```", "").strip()
     return json.loads(clean_json)
 
 if st.button("✨ Extraire avec Macros & Calories", type="primary"):
